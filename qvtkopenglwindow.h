@@ -14,7 +14,7 @@
 #include <vtkRenderWindow.h>
 #include <QVTKOpenGLNativeWidget.h>
 
-
+#include <dlfcn.h>
 //using namespace cv;
 
 typedef pcl::PointXYZRGBA       PointT;
