@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/">
+        <file>line-simple.html</file>
+        <file>echarts.min.js</file>
+        <file>qwebchannel.js</file>
+        <file>map-polygon.html</file>
+        <file>input_messages_to_qt.html</file>
+        <file>bmap.js</file>
+        <file>dynamic-data2.html</file>
+    </qresource>
+</RCC>

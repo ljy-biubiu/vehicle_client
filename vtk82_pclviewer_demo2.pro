@@ -15,38 +15,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    cv4demo.cpp \
     main.cpp \
-    mainwindow.cpp \
-    qvtkopenglwindow.cpp
+    mainwindow.cpp
 
 HEADERS += \
-    cv4demo.h \
-    mainwindow.h \
-    qvtkopenglwindow.h
+    mainwindow.h
 
-
-INCLUDEPATH += /usr/include/eigen3
-
-INCLUDEPATH += /usr/local/include/vtk-8.2
-LIBS += /usr/local/lib/libvtk*.so
-
-#message($$LIBS)
-
-#INCLUDEPATH += /usr/include/boost
-#LIBS += /usr/lib/x86_64-linux-gnu/libboost_*.so
-
-INCLUDEPATH += /usr/local/include/pcl-1.11
-LIBS += /usr/local/lib/libpcl_*.so
-
-INCLUDEPATH += /usr/include/opencv4/
-LIBS += /usr/lib/x86_64-linux-gnu/libopencv_*.so
-
-
-include("./qt_echart_map_demo/qt_echar_map_demo.pri")
+include("./qt_echart_pluge/qt_echar_map_demo.pri")
+include("./pointCloud/pointCloud.pri")
+include("./camera/camera.pri")
 
 DISTFILES += \
-    ./qt_echart_map_demo/qt_echar_map_demo.pri
+    ./qt_echart_pluge/qt_echar_map_demo.pri \
+    ./pointCloud/pointCloud.pri \
+    ./camera/camera.pri
 
 
 

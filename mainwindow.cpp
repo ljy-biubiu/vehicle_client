@@ -97,20 +97,6 @@ void MainWindow::mainLayOut()
     main_widget->setLayout(main_layout);
     this->setCentralWidget(main_widget);
 
-
-
-//            //设置布局
-//            Search_H_Layout->addLayout(search_H_Layout);
-//            mainLayout_V->addSpacing(15);
-//            mainLayout_V->addLayout(Search_H_Layout);
-//            mainLayout_V->addSpacing(25);
-//            mainLayout_V->addLayout(cardLayout);
-//            mainLayout_V->addStretch(); //在下方添加一个弹簧填空
-
-//            mainLayout_H->addLayout(button_V_Layout);
-//            mainLayout_H->addSpacing(10);
-//            mainLayout_H->addWidget(line_V);
-//            mainLayout_H->addLayout(mainLayout_V);
 }
 
 
