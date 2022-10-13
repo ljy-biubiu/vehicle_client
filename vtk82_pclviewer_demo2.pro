@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui webenginewidgets webchannel
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 CONFIG += c++14
@@ -41,6 +41,13 @@ LIBS += /usr/local/lib/libpcl_*.so
 
 INCLUDEPATH += /usr/include/opencv4/
 LIBS += /usr/lib/x86_64-linux-gnu/libopencv_*.so
+
+
+include("./qt_echart_map_demo/qt_echar_map_demo.pri")
+
+DISTFILES += \
+    ./qt_echart_map_demo/qt_echar_map_demo.pri
+
 
 
 LIBS += -ldl

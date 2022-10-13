@@ -7,4 +7,7 @@
         <file>paste.png</file>
         <file>save.png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>myQss.qss</file>
+    </qresource>
 </RCC>
