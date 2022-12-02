@@ -2,7 +2,225 @@
 #define MYPARAMS_H
 
 #include "protocol.hpp"
-#include<iostream>
+#include <iostream>
+#include <vector>
+
+#include <pcl/io/ifs_io.h>
+#include <pcl/io/pcd_io.h>
+#include <pcl/point_cloud.h>
+#include <pcl/ModelCoefficients.h>
+
+#include <opencv2/opencv.hpp>
+
+#define PI_ 3.1415926
+
+typedef pcl::PointXYZRGBA PointT;
+typedef pcl::PointCloud<PointT> PointCloudT;
+typedef pcl::PointCloud<PointT>::Ptr PointCloudTPtr;
+
+
+
+
+
+struct PlaneParams {
+    double A{};
+    double B{};
+    double C{};
+    double D{};
+    PointT centreOfGravity;
+    PointT arrowPoint;
+    pcl::ModelCoefficients::Ptr coefficients;
+    PointCloudTPtr planeCloud;
+    PointCloudTPtr nonPlaneCloud;
+    PlaneParams(){
+        coefficients.reset(new pcl::ModelCoefficients);
+        planeCloud.reset(new PointCloudT);
+        nonPlaneCloud.reset(new PointCloudT);
+    }
+};
+
+
+struct RTParams {
+    double x;//x方向 配准平移距离，米
+    double y;
+    double z;
+    double roll;// 绕x轴 配准旋转角度，度，右手定则
+    double pitch;
+    double heading;
+
+    RTParams() {
+        x = 0;
+        y = 0;
+        z = 0;
+        roll = 0;
+        pitch = 0;
+        heading = 0;
+    }
+
+    RTParams(double _roll, double _pitch, double _heading, double _x, double _y, double _z) {
+        x = _x;
+        y = _y;
+        z = _z;
+        roll = _roll;
+        pitch = _pitch;
+        heading = _heading;
+    }
+};
+
+
+struct LineInfo {
+    int index{};
+    PointCloudTPtr cloud;
+    PointCloudTPtr nonLineCloud;
+    PointT centerPoint{};//中心点
+    PointT direct{};//方向向量
+    double w{};
+    double l{};
+    double h{};
+    double heading{};
+    PointT minP;//长度方向最近点
+    PointT maxP;//长度方向最远点
+    pcl::ModelCoefficients::Ptr coefficients;
+
+    LineInfo() {
+        cloud.reset(new PointCloudT);
+        nonLineCloud.reset(new PointCloudT);
+        coefficients.reset(new pcl::ModelCoefficients);
+    }
+};
+
+struct RectangleInfo {
+    std::vector<LineInfo> linesL;// 平行直线
+    std::vector<LineInfo> linesW;// 平行直线
+    std::vector<PointT> cornerPoints;
+    double l;
+    double w;
+};
+
+struct ObjectInfo {
+    double x{};
+    double y{};
+    double z{};
+    double w{};
+    double l{};
+    double h{};
+    double heading{};
+    bool usedFlag{};
+    cv::RotatedRect rotatedRect;
+    std::vector<cv::Point3f> cornerPoint;
+    PointT minP;//长度方向最近点
+    PointT maxP;//长度方向最远点
+    PointT direct;//长度方向方向向量
+    PointT directW;//长度方向方向向量
+};
+
+struct RectangleGrid {
+    double l;
+    double w;
+    double heading;
+    PointT centerPoint;
+    PointT highestPoint;
+    PointT lowestPoint;
+    std::vector<PointT> cornerPoints;
+
+    RectangleGrid() {
+        l = 0;
+        w = 0;
+        heading = 0;
+        centerPoint = {};
+        highestPoint = {};
+        lowestPoint = {};
+    }
+};
+
+
+struct ShipParamIn {
+    PointCloudTPtr cloudSrc;
+    float boundRadius;//边界提取的半径
+    float normalRadius;//法线提取的半径
+    int gridNumX;//
+    int gridNumY;
+    RTParams rtParams;
+    std::string roiFile;
+    PointCloudTPtr cloudInited;
+    double min_monitor_angle;
+    double max_monitor_angle;
+
+    ShipParamIn() {
+        cloudSrc.reset(new PointCloudT);
+        boundRadius = 2;
+        normalRadius = 2;
+        gridNumX = 0;
+        gridNumY = 0;
+        min_monitor_angle = 0;
+        max_monitor_angle = 0;
+        rtParams = {};
+        roiFile = "/home/ljy/Desktop/test_mymonitoer/PortMonitor1127_2202/PortMonitor/ALGORITHM/ROIPointsFile/ShipROIPoints.txt";
+        cloudInited.reset(new PointCloudT);
+    }
+};
+
+
+struct GroundParamIn {
+    PointCloudTPtr cloudSrc;
+    int gridNumX;//
+    int gridNumY;
+    RTParams rtParams;
+    std::string roiFile;
+    std::string rectangleROIFile;//点顺序：左下角，右下角，右上角，左上角
+    PointCloudTPtr cloudInited;
+    double min_monitor_angle;
+    double max_monitor_angle;
+
+    GroundParamIn() {
+        cloudSrc.reset(new PointCloudT);
+        gridNumX = 0;
+        gridNumY = 0;
+        rtParams = {};
+        min_monitor_angle = 0;
+        max_monitor_angle = 0;
+        roiFile = "/home/ljy/Desktop/test_mymonitoer/PortMonitor1127_2202/PortMonitor/ALGORITHM/ROIPointsFile/GroundROIPoints.txt";
+        rectangleROIFile = "/home/ljy/Desktop/test_mymonitoer/PortMonitor1127_2202/PortMonitor/ALGORITHM/ROIPointsFile/GroundRectanglePoints.txt";
+        cloudInited.reset(new PointCloudT);
+    }
+};
+
+struct GroundParamOut {
+    PointCloudTPtr cloudSrcRT;
+    PlaneParams groundPlaneParams;
+    PointCloudTPtr groundCloud;
+    std::vector<PointT> materialHighestPoint;
+
+    GroundParamOut() {
+        cloudSrcRT.reset(new PointCloudT);
+        groundCloud.reset(new PointCloudT);
+        groundPlaneParams = {};
+    }
+};
+
+struct ShipParamOut {
+    PointCloudTPtr cloudSrcRT;//原始校正点云
+    PlaneParams deckPlaneParams;// 甲板平面参数
+    PointCloudTPtr deckCloud;// 甲板点云
+    PointCloudTPtr deckBottomCloud;// 甲板底部点云
+    PointCloudTPtr deckProjectionCloud;// 甲板投影点云
+    PointCloudTPtr boundaryCloud;//边界点云
+    std::vector<RectangleInfo> rectangleInfoVec;// 识别后的矩形信息
+    std::vector<ObjectInfo> allClusters;// 所有聚类结果信息
+    std::vector<PointT> bottomHighestPoint;// 底部最高点
+    PointCloudTPtr polarCloud;// 极坐标点云
+    std::vector<RectangleGrid> rectangleGridVec;// 每个矩形栅格信息
+
+    ShipParamOut() {
+        cloudSrcRT.reset(new PointCloudT);
+        deckCloud.reset(new PointCloudT);
+        deckBottomCloud.reset(new PointCloudT);
+        deckProjectionCloud.reset(new PointCloudT);
+        boundaryCloud.reset(new PointCloudT);
+        polarCloud.reset(new PointCloudT);
+        deckPlaneParams = {};
+    }
+};
 
 
 struct LidarPreset
@@ -82,6 +300,8 @@ struct TotalParams
     LidarCameraBase lidarCameraBase;
     CameraBase cameraBase;
     LowerMachineBase lowerMachineBase;
+    GroundParamIn groundParamIn;
+    ShipParamIn shipParamIn;
 
     void printData()
     {

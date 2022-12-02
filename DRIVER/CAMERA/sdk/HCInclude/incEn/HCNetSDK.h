@@ -11979,18 +11979,18 @@ typedef struct
 typedef struct
 {
     BYTE sSerialNumber[SERIALNO_LEN];    //SN
-    BYTE byAlarmInPortNum;                 //Number of Alarm input
-    BYTE byAlarmOutPortNum;                 //Number of Alarm Output
-    BYTE byDiskNum;                         //Number of Hard Disk
-    BYTE byDVRType;                         //DVR Type,  1: DVR 2: ATM DVR 3: DVS ......
-    BYTE byChanNum;                         //Number of Analog Channel
-    BYTE byStartChan;                     //The first Channel No. E.g. DVS- 1, DVR- 1
-    BYTE byAudioChanNum;                 //Number of Audio Channel
-    BYTE byIPChanNum;                     //Maximum number of IP Channel  low
-    BYTE byZeroChanNum;             //Zero channel encoding number//2010- 01- 16
-    BYTE byMainProto;             //Main stream transmission protocol 0- private,  1- rtsp,2-both private and rtsp
-    BYTE bySubProto;                 //Sub stream transmission protocol 0- private,  1- rtsp,2-both private and rtsp
-    BYTE bySupport;         //Ability, the 'AND' result by bit: 0- not support;  1- support
+    BYTE byAlarmInPortNum{0};                 //Number of Alarm input
+    BYTE byAlarmOutPortNum{0};                 //Number of Alarm Output
+    BYTE byDiskNum{0};                        //Number of Hard Disk
+    BYTE byDVRType{0};                        //DVR Type,  1: DVR 2: ATM DVR 3: DVS ......
+    BYTE byChanNum{0};                        //Number of Analog Channel
+    BYTE byStartChan{0};                    //The first Channel No. E.g. DVS- 1, DVR- 1
+    BYTE byAudioChanNum{0};                //Number of Audio Channel
+    BYTE byIPChanNum{0};                    //Maximum number of IP Channel  low
+    BYTE byZeroChanNum{0};            //Zero channel encoding number//2010- 01- 16
+    BYTE byMainProto{0};            //Main stream transmission protocol 0- private,  1- rtsp,2-both private and rtsp
+    BYTE bySubProto{0};                //Sub stream transmission protocol 0- private,  1- rtsp,2-both private and rtsp
+    BYTE bySupport{0};        //Ability, the 'AND' result by bit: 0- not support{0}; 1- support
     //bySupport & 0x1,  smart search
     //bySupport & 0x2,  backup
     //bySupport & 0x4,  get compression configuration ability
@@ -11998,7 +11998,7 @@ typedef struct
     //bySupport & 0x10, support remote SADP
     //bySupport & 0x20  support Raid card
     // bySupport & 0x40 support IPSAN directory search
-    BYTE bySupport1;        // Ability expand, the 'AND' result by bit: 0- not support;  1- support
+    BYTE bySupport1{0};       // Ability expand, the 'AND' result by bit: 0- not support{0}; 1- support
     // bySupport1 & 0x1, support snmp v30
     // bySupport1& 0x2,support distinguish download and playback
     //bySupport1 & 0x4, support deployment level
@@ -12007,37 +12007,37 @@ typedef struct
     //bySupport1 & 0x20, support rtsp over http
     //bySupport1 & 0x40, support delay preview
     //bySuppory1 & 0x80 support NET_DVR_IPPARACFG_V40, in addition  support  License plate of the new alarm information
-    BYTE bySupport2;        // Ability expand, the 'AND' result by bit: 0- not support;  1- support
+    BYTE bySupport2{0};       // Ability expand, the 'AND' result by bit: 0- not support{0}; 1- support
     //bySupport & 0x1, decoder support get stream by URL
     //bySupport2 & 0x2,  support FTPV40
     //bySupport2 & 0x4,  support ANR
     //bySupport2 & 0x20, support get single item of device status
     //bySupport2 & 0x40,  support stream encryt
-    WORD wDevType;              //device type
-    BYTE bySupport3;        //Support  epresent by bit, 0 - not support 1 - support 
+    WORD wDevType{0};             //device type
+    BYTE bySupport3{0};       //Support  epresent by bit, 0 - not support 1 - support
     //bySupport3 & 0x1- support batch config stream compress  
     //bySupport3 & 0x8  support use delay preview parameter when delay preview
     //bySupport3 & 0x10 support the interface of getting alarmhost main status V40
-    BYTE byMultiStreamProto;//support multi stream, represent by bit, 0-not support ;1- support; bit1-stream 3 ;bit2-stream 4, bit7-main stream, bit8-sub stream
-    BYTE byStartDChan;        //Start digital channel
-    BYTE byStartDTalkChan;    //Start digital talk channel
-    BYTE byHighDChanNum;        //Digital channel number high
-    BYTE bySupport4;        //Support  epresent by bit, 0 - not support 1 - support
+    BYTE byMultiStreamProto{0};//support multi stream, represent by bit, 0-not support ;1- support{0};bit1-stream 3 ;bit2-stream 4, bit7-main stream, bit8-sub stream
+    BYTE byStartDChan{0};       //Start digital channel
+    BYTE byStartDTalkChan{0};   //Start digital talk channel
+    BYTE byHighDChanNum{0};        //Digital channel number high
+    BYTE bySupport4{0};        //Support  epresent by bit, 0 - not support 1 - support
     //bySupport4 & 0x4 whether support video wall unified interface
     // bySupport4 & 0x80 Support device upload center alarm enable
-    BYTE byLanguageType;    // support language type by bit,0-support,1-not support  
+    BYTE byLanguageType{0};    // support language type by bit,0-support,1-not support
     //  byLanguageType 0 -old device
     //  byLanguageType & 0x1 support chinese
     //  byLanguageType & 0x2 support english
-    BYTE byVoiceInChanNum;   //voice in chan num 
-    BYTE byStartVoiceInChanNo; //start voice in chan num
-    BYTE  bySupport5;  //0-no support,1-support,bit0-muti stream
+    BYTE byVoiceInChanNum{0};   //voice in chan num
+    BYTE byStartVoiceInChanNo{0}; //start voice in chan num
+    BYTE  bySupport5{0};  //0-no support,1-support,bit0-muti stream
     //bySupport5 &0x01support wEventTypeEx 
     //bySupport5 &0x04support sence expend
-    BYTE  bySupport6;
-    BYTE  byMirrorChanNum;    //mirror channel num,<it represents direct channel in the recording host>
-    WORD  wStartMirrorChanNo;  //start mirror chan
-    BYTE bySupport7;        //Support  epresent by bit, 0 - not support 1 - support 
+    BYTE  bySupport6{0};
+    BYTE  byMirrorChanNum{0};    //mirror channel num,<it represents direct channel in the recording host>
+    WORD  wStartMirrorChanNo{0};  //start mirror chan
+    BYTE bySupport7{0};        //Support  epresent by bit, 0 - not support 1 - support
     //bySupport7 & 0x1- supports INTER_VCA_RULECFG_V42 extension    
     // bySupport7 & 0x2  Supports HVT IPC mode expansion
     // bySupport7 & 0x04  Back lock time
@@ -12046,7 +12046,7 @@ typedef struct
     // bySupport7 & 0x20  Support OSD character overlay V50
     // bySupport7 & 0x40  Support master slave tracking (slave camera)
     // bySupport7 & 0x80  Support message encryption 
-    BYTE  byRes2;
+    BYTE  byRes2{0};
 }NET_DVR_DEVICEINFO_V30, *LPNET_DVR_DEVICEINFO_V30;
 
 typedef struct tagNET_DVR_DEVICEINFO_V40
@@ -12122,7 +12122,7 @@ typedef struct tagNET_DVR_PREVIEWINFO{
     DWORD    dwStreamType;    // Stream type 0-main stream,1-sub stream,2-third stream,3-forth stream,4-fifth stream,5-sixth stream,7-seventh stream,8-eighth stream,9-ninth stream,10-tenth stream
     DWORD    dwLinkMode;        // Protocol type: 0-TCP, 1-UDP, 2-Muticast, 3-RTP,4-RTP/RTSP, 5-RSTP/HTTP
     HWND    hPlayWnd;        // Play window's handle;  set NULL to disable preview
-    DWORD bBlocked;          //If data stream requesting process is blocked or not: 0-no, 1-yes  
+    DWORD bBlocked;          //If data stream requesting process is blocked or not: 0-no, 1-yes
     //if true, the SDK Connect failure return until 5s timeout  , not suitable for polling to preview.
     DWORD bPassbackRecord; //0- not enable  ,1 enable
     BYTE byPreviewMode;    // Preview mode 0-normal preview,2-delay preview
@@ -12130,7 +12130,7 @@ typedef struct tagNET_DVR_PREVIEWINFO{
     BYTE byProtoType; //0-private,1-RTSP
     BYTE byRes1;
     BYTE byVideoCodingType;
-    DWORD dwDisplayBufNum; //soft player display buffer size(number of frames), range:1-50, default:1 
+    DWORD dwDisplayBufNum; //soft player display buffer size(number of frames), range:1-50, default:1
     BYTE byNPQMode;  //0-direct connect 1-by SMS
     BYTE byRes[215];
 }NET_DVR_PREVIEWINFO, *LPNET_DVR_PREVIEWINFO;

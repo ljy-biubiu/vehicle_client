@@ -1,14 +1,18 @@
 #include "filehanddle.h"
 #include "qdebug.h"
+#include <stdio.h>
+#include <unistd.h>
 
 FileHanddle::FileHanddle()
 {
-
+    char buf[128] = {0};
+    getcwd(buf, sizeof(buf));
+    read_file_path = std::string(buf) + "/my_paramss.json";
 }
 
 void FileHanddle::init(TotalParams &total_params)
 {
-    read_file_path = "/home/ljy/my_paramss.json";
+    //read_file_path = "/home/ljy/my_paramss.json";
     readDataLocal(total_params);
 }
 
@@ -110,6 +114,30 @@ int FileHanddle::writeDataLocal(TotalParams &total_params)
     //子节点挂到根节点上
     root["LowerMachineBase"] = Json::Value(LowerMachineBase);
 
+    //子节点
+    Json::Value GroundParamIn;
+    //子节点属性
+    GroundParamIn["gridNumX"] = Json::Value(total_params.groundParamIn.gridNumX);
+    GroundParamIn["gridNumY"] = Json::Value(total_params.groundParamIn.gridNumY);
+    GroundParamIn["max_monitor_angle"] = Json::Value(total_params.groundParamIn.max_monitor_angle);
+    GroundParamIn["min_monitor_angle"] = Json::Value(total_params.groundParamIn.min_monitor_angle);
+    //子节点挂到根节点上
+    root["GroundParamIn"] = Json::Value(GroundParamIn);
+
+    //子节点
+    Json::Value ShipParamIn;
+    //子节点属性
+    ShipParamIn["gridNumX"] = Json::Value(total_params.shipParamIn.gridNumX);
+    ShipParamIn["gridNumY"] = Json::Value(total_params.shipParamIn.gridNumY);
+    ShipParamIn["max_monitor_angle"] = Json::Value(total_params.shipParamIn.max_monitor_angle);
+    ShipParamIn["min_monitor_angle"] = Json::Value(total_params.shipParamIn.min_monitor_angle);
+    ShipParamIn["boundRadius"] = Json::Value(total_params.shipParamIn.boundRadius);
+    ShipParamIn["normalRadius"] = Json::Value(total_params.shipParamIn.normalRadius);
+    //子节点挂到根节点上
+    root["ShipParamIn"] = Json::Value(ShipParamIn);
+
+
+
     std::ofstream ofs;
     ofs.open(read_file_path);
     if(!ofs.is_open())
@@ -201,6 +229,21 @@ void FileHanddle::readDataLocal(TotalParams &total_params)
         //
         total_params.lowerMachineBase.ip = json_value["LowerMachineBase"]["ip"].asString();
         total_params.lowerMachineBase.port = json_value["LowerMachineBase"]["port"].asInt();
+
+        //
+        total_params.groundParamIn.gridNumX = json_value["GroundParamIn"]["gridNumX"].asDouble();
+        total_params.groundParamIn.gridNumY = json_value["GroundParamIn"]["gridNumY"].asDouble();
+        total_params.groundParamIn.max_monitor_angle = json_value["GroundParamIn"]["max_monitor_angle"].asDouble();
+        total_params.groundParamIn.min_monitor_angle = json_value["GroundParamIn"]["min_monitor_angle"].asDouble();
+
+        //
+        total_params.shipParamIn.gridNumX = json_value["ShipParamIn"]["gridNumX"].asDouble();
+        total_params.shipParamIn.gridNumY = json_value["ShipParamIn"]["gridNumY"].asDouble();
+        total_params.shipParamIn.max_monitor_angle = json_value["ShipParamIn"]["max_monitor_angle"].asDouble();
+        total_params.shipParamIn.min_monitor_angle = json_value["ShipParamIn"]["min_monitor_angle"].asDouble();
+        total_params.shipParamIn.boundRadius = json_value["ShipParamIn"]["boundRadius"].asDouble();
+        total_params.shipParamIn.normalRadius = json_value["ShipParamIn"]["normalRadius"].asDouble();
+        //
 
     }
     else

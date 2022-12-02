@@ -37,9 +37,11 @@
 #include <QToolBar>
 #include <QHBoxLayout>
 #include <QWidget>
+#include <QApplication>
 
-
+#include "algorithm_interface.h"
 #include "lidar_drive_interface.h"
+#include "algorithm.h"
 #include "ptz.h"
 #include "paramsevent.hpp"
 
@@ -52,15 +54,19 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 public:
-    MainWindow(PTZ* ptz_,LidarDriveInterface* lidarDriveInterface_,QWidget *parent = nullptr);
+    MainWindow(PTZ* ptz_,LidarDriveInterface* lidarDriveInterface_,QApplication * my_app_,QWidget *parent = nullptr);
     ~MainWindow();
 
     CameraViewer * getCameraWidget();
     void updatePointCould();
     void initPTZ(PTZ*);
+    void initAlgorithmInterface(AlgorithmInterface* msg)
+    {
+        algorithmInterface = msg;
+    }
     void globalParamsCallback(TotalParams msg,bool save_flag);
-//    void globalParamsCallback(TotalParams msg);
-//    int globalParamsCallback(int msg);
+    //    void globalParamsCallback(TotalParams msg);
+    //    int globalParamsCallback(int msg);
 
 private:
     void initMenu();
@@ -69,16 +75,21 @@ private:
     void createActions();
     void mainLayOut();
     void initPointCShow();
+    void initObeject();
+
+    void updateAlgPointCould();
+
     //void initCameraDriveShow();
 
     void mainEventCallback();
 
-    QVTKOpenGLNativeWidget *qvtkOpenglNativeWidget;
+    QApplication * my_app;
     boost::shared_ptr<pcl::visualization::PCLVisualizer> viewer;
 
     AddLidar *add_lidar;
     MainTitleBar *main_title_bar;
-//    EchartWindow *echartWindow;
+    //    EchartWindow *echartWindow;
+    QVTKOpenGLNativeWidget *qvtkOpenglNativeWidget;
     ImageWidget *imageWidget;
     ImageWidget *mainImageWidget;
     PaintArea *paint_area;
@@ -90,6 +101,7 @@ private:
 
     PTZ* ptz;
     LidarDriveInterface* lidarDriveInterface;
+    AlgorithmInterface* algorithmInterface = nullptr;
 
     QWidget *main_widget;
     QWidget *right_camera_widget;

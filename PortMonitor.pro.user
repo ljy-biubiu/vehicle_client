@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.11.1, 2022-11-29T15:51:52. -->
+<!-- Written by QtCreator 4.11.1, 2022-12-01T18:02:08. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -285,8 +285,9 @@
     </valuelist>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/ljy/Desktop/test_mymonitoer/PortMonitor1127_2202/PortMonitor2/PortMonitor.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/ljy/Desktop/test_mymonitoer/PortMonitor1127_2202/PortMonitor2/PortMonitor.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">PortMonitor2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/ljy/Desktop/test_mymonitoer/PortMonitor1127_2202/PortMonitor/PortMonitor.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">/home/ljy/Desktop/test_mymonitoer/PortMonitor1127_2202/PortMonitor/PortMonitor.pro</value>
     <value type="QString" key="RunConfiguration.Arguments"></value>
     <value type="bool" key="RunConfiguration.Arguments.multi">false</value>
     <value type="QString" key="RunConfiguration.OverrideDebuggerStartup"></value>

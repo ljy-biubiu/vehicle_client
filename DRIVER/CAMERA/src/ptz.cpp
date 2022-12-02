@@ -28,13 +28,23 @@ void PTZ::globalParamsCallback(TotalParams msg,bool save_flag)
 }
 
 
+void PTZ::start()
+{
+    std::thread dowork_thread(std::bind(&PTZ::run, this));
+    dowork_thread.detach();
+}
+
 
 void PTZ::PTZ_init(HWND hwnd_)
 {
+    qDebug()<<"cam_IP : "<< cam_IP;
+    qDebug()<<"cam_ID : "<< cam_ID;
+    qDebug()<<"cam_Pass : "<< cam_Pass;
+
     NET_DVR_Init();
     NET_DVR_SetConnectTime(2000, 1);
     NET_DVR_SetReconnect(120000, true);
-    NET_DVR_DEVICEINFO_V30 struDeviceInfo = {0};
+    NET_DVR_DEVICEINFO_V30 struDeviceInfo;
 
     char* camera_ip ;
     char* camera_userid;
@@ -45,11 +55,6 @@ void PTZ::PTZ_init(HWND hwnd_)
     camera_ip = ba1.data();
     camera_userid = ba2.data();
     camera_pass = ba3.data();
-
-
-    qDebug()<<"cam_IP : "<< cam_IP;
-    qDebug()<<"cam_ID : "<< cam_ID;
-    qDebug()<<"cam_Pass : "<< cam_Pass;
 
     lUserID = NET_DVR_Login_V30(camera_ip, 8000,camera_userid, camera_pass, &struDeviceInfo);
 
@@ -66,10 +71,6 @@ void PTZ::PTZ_init(HWND hwnd_)
     }
     NET_DVR_PTZPreset_Other(lUserID,1,GOTO_PRESET,6);//回到预置点6
     PTZ_Cruise_Open(); //开始巡航
-
-
-    std::thread dowork_thread(std::bind(&PTZ::run, this));
-    dowork_thread.detach();
 
 
 
@@ -89,6 +90,8 @@ void PTZ::PTZ_init(HWND hwnd_)
         NET_DVR_Logout(this->lUserID);
         NET_DVR_Cleanup();
     }
+
+    this->start();
 
 }
 

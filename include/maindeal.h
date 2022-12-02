@@ -10,10 +10,7 @@
 #include "chat_plc.h"
 #include "paramsevent.hpp"
 #include "my_log.h"
-
-//using ObserverFunc = std::function<void(TotalParams)>;
-//using ObserverFunc = std::function<int(int)>;
-//using ObserverFunc = std::function<int(int, int)>;
+#include "algorithm.h"
 
 class Maindeal
 {
@@ -24,12 +21,9 @@ public:
     const QApplication* getApp();
     void initUI();
 
-
-    //驱动
-
-
 private:
 
+    void initAlcorithm();
     void chatLowerMachine();
     void initCameraDrive();
     void initLidarDrive();
@@ -45,8 +39,8 @@ private:
     QApplication* app;
     QDesktopWidget* dw;
     MainWindow* w;
+    AlgorithmInterface* algorithmInterface;
     PTZ *ptz = nullptr;
-    //LOG *my_log;
     LidarDriveInterface *lidarDriveInterface = nullptr;
     ComunicateInterface *comunicateInterface;
     std::shared_ptr<ParamsEvent<ObserverFunc>> params_event;

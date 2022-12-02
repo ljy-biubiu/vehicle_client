@@ -51,12 +51,12 @@ void AddLidar::ShowData(TotalParams &msg)
     ui->base_z->setText(QString("%1").arg(msg_.lidarPreset.Base_Z));
 
     ui->setradius->setText(QString("%1").arg(msg_.lidarPreset.paintarea_Radius));
-    ui->clusterTolerance->setText(QString("%1").arg(msg_.lidarCluster.ClusterTolerance));
+    //ui->clusterTolerance->setText(QString("%1").arg(msg_.lidarCluster.ClusterTolerance));
 
-    ui->minClusterSize->setText(QString("%1").arg(msg_.lidarCluster.MinClusterSize));
-    ui->maxClusterSize->setText(QString("%1").arg(msg_.lidarCluster.MaxClusterSize));
-    ui->resolution->setText(QString("%1").arg(msg_.lidarCluster.Resolution));
-    ui->difference_threshold->setText(QString("%1").arg(msg_.lidarCluster.Difference_threshold));
+    //ui->minClusterSize->setText(QString("%1").arg(msg_.lidarCluster.MinClusterSize));
+    //ui->maxClusterSize->setText(QString("%1").arg(msg_.lidarCluster.MaxClusterSize));
+    //ui->resolution->setText(QString("%1").arg(msg_.lidarCluster.Resolution));
+    //ui->difference_threshold->setText(QString("%1").arg(msg_.lidarCluster.Difference_threshold));
 
     ui->comboBox->setCurrentText(QString(msg_.lidarBase.LidarModel));
     ui->pos_x->setText(QString("%1").arg(msg_.lidarCameraBase.Pos_X));
@@ -70,7 +70,7 @@ void AddLidar::ShowData(TotalParams &msg)
     ui->view_z->setText(QString("%1").arg(msg_.lidarCameraBase.View_Z));
 
     ui->lidarPort->setText(QString("%1").arg(msg_.lidarBase.lidarPort));
-    ui->kValue->setText(QString("%1").arg(msg_.lidarCluster.Kvalue));
+    //ui->kValue->setText(QString("%1").arg(msg_.lidarCluster.Kvalue));
 
     ui->dataAddress->setText(QString::fromStdString(msg_.lidarBase.DataAddress));
     ui->lidarAddress->setText(QString::fromStdString(msg_.lidarBase.LidarAddress));
@@ -78,14 +78,24 @@ void AddLidar::ShowData(TotalParams &msg)
     ui->serverPort->setText(QString("%1").arg(msg_.lidarBase.ServerPort));
 
 
-
-
-
     ui->camera_ip->setText(QString::fromStdString(msg_.cameraBase.ip));
     ui->camera_name->setText(QString::fromStdString(msg_.cameraBase.name));
     ui->camera_key->setText(QString::fromStdString(msg_.cameraBase.code));
     ui->lower_machine_ip->setText(QString::fromStdString(msg_.lowerMachineBase.ip));
     ui->lower_machine_port->setText(QString("%1").arg(msg_.lowerMachineBase.port));
+
+
+    ui->gound_grid_X->setText(QString("%1").arg( msg_.groundParamIn.gridNumX));
+    ui->gound_grid_Y->setText(QString("%1").arg(msg_.groundParamIn.gridNumY));
+    ui->gound_max_angle->setText(QString("%1").arg(msg_.groundParamIn.max_monitor_angle));
+    ui->gound_min_angle->setText(QString("%1").arg(msg_.groundParamIn.min_monitor_angle));
+
+    ui->ship_grid_X->setText(QString("%1").arg(msg_.shipParamIn.gridNumX));
+    ui->ship_grid_Y->setText(QString("%1").arg(msg_.shipParamIn.gridNumY));
+    ui->ship_max_angle->setText(QString("%1").arg(msg_.shipParamIn.max_monitor_angle));
+    ui->ship_min_angle->setText(QString("%1").arg(msg_.shipParamIn.min_monitor_angle));
+    ui->ship_bound_radius->setText(QString("%1").arg(msg_.shipParamIn.boundRadius));
+    ui->ship_normal_radius->setText(QString("%1").arg(msg_.shipParamIn.normalRadius));
 
 
 }
@@ -102,12 +112,12 @@ void AddLidar::on_btn_sure_clicked()
     msg_.lidarPreset.Base_Z = ui->base_z->text().toFloat();
 
     msg_.lidarPreset.paintarea_Radius = ui->setradius->text().toFloat();
-    msg_.lidarCluster.ClusterTolerance = ui->clusterTolerance->text().toFloat();
-    msg_.lidarCluster.MinClusterSize = ui->minClusterSize->text().toInt();
+    //msg_.lidarCluster.ClusterTolerance = ui->clusterTolerance->text().toFloat();
+    //msg_.lidarCluster.MinClusterSize = ui->minClusterSize->text().toInt();
 
-    msg_.lidarCluster.MaxClusterSize = ui->maxClusterSize->text().toInt();
-    msg_.lidarCluster.Resolution = ui->resolution->text().toFloat();
-    msg_.lidarCluster.Difference_threshold = ui->difference_threshold->text().toFloat();
+    //msg_.lidarCluster.MaxClusterSize = ui->maxClusterSize->text().toInt();
+    //msg_.lidarCluster.Resolution = ui->resolution->text().toFloat();
+    //msg_.lidarCluster.Difference_threshold = ui->difference_threshold->text().toFloat();
 
     msg_.lidarBase.LidarModel = ui->comboBox->currentText().toInt();
     msg_.lidarCameraBase.Pos_X = ui->pos_x->text().toFloat();
@@ -121,7 +131,7 @@ void AddLidar::on_btn_sure_clicked()
     msg_.lidarCameraBase.View_Z = ui->view_z->text().toFloat();
 
     msg_.lidarBase.lidarPort = ui->lidarPort->text().toInt();
-    msg_.lidarCluster.Kvalue = ui->kValue->text().toFloat();
+    //msg_.lidarCluster.Kvalue = ui->kValue->text().toFloat();
 
     //data.distance = ui->distance->text().toFloat();
     msg_.lidarBase.DataAddress = ui->dataAddress->text().toStdString();
@@ -136,6 +146,22 @@ void AddLidar::on_btn_sure_clicked()
 
     msg_.lowerMachineBase.ip = ui->lower_machine_ip->text().toStdString();
     msg_.lowerMachineBase.port = ui->lower_machine_port->text().toInt();
+
+    msg_.groundParamIn.gridNumX = ui->gound_grid_X->text().toFloat();
+    msg_.groundParamIn.gridNumY = ui->gound_grid_Y->text().toFloat();
+    msg_.groundParamIn.max_monitor_angle = ui->gound_max_angle->text().toDouble();
+    msg_.groundParamIn.min_monitor_angle = ui->gound_min_angle->text().toDouble();
+
+    msg_.shipParamIn.gridNumX = ui->ship_grid_X->text().toFloat();
+    msg_.shipParamIn.gridNumY = ui->ship_grid_Y->text().toFloat();
+    msg_.shipParamIn.max_monitor_angle = ui->ship_max_angle->text().toDouble();
+    msg_.shipParamIn.min_monitor_angle = ui->ship_min_angle->text().toDouble();
+    msg_.shipParamIn.boundRadius = ui->ship_bound_radius->text().toFloat();
+    msg_.shipParamIn.normalRadius = ui->ship_normal_radius->text().toFloat();
+
+//    GroundParamIn groundParamIn;
+//    ShipParamIn shipParamIn;
+
 
     emit SendSet(msg_);
     this->close();

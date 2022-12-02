@@ -14,6 +14,7 @@ class CameraViewer : public QWidget
 public:
     explicit CameraViewer(QWidget *parent = nullptr);
     ~CameraViewer();
+    QWidget *my_widget;
 
 private:
     Ui::CameraViewer *ui;

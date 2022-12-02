@@ -69,8 +69,10 @@ LIBS += /usr/opencv-3.4.8/lib/libopencv_*
 INCLUDEPATH += /usr/local/include/vtk-8.2
 LIBS += /usr/local/lib/libvtk*.so
 
-INCLUDEPATH += /usr/local/include/pcl-1.11
-LIBS += /usr/local/lib/libpcl_*.so
+#INCLUDEPATH += /usr/local/include/pcl-1.11
+#LIBS += /usr/local/lib/libpcl_*.so
+INCLUDEPATH += /usr/include/pcl-1.9
+LIBS += /usr/lib/libpcl_*.so
 
 INCLUDEPATH += /usr/include/jsoncpp
 LIBS += /usr/lib/x86_64-linux-gnu/libjsoncpp*.so

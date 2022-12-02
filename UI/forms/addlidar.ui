@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>992</height>
+    <height>1045</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -19,7 +19,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_20">
+  <layout class="QVBoxLayout" name="verticalLayout_26">
    <item>
     <widget class="ChildTitleBar" name="widget" native="true">
      <property name="minimumSize">
@@ -38,7 +38,7 @@
    </item>
    <item>
     <widget class="QWidget" name="widget_2" native="true">
-     <layout class="QVBoxLayout" name="verticalLayout_13">
+     <layout class="QVBoxLayout" name="verticalLayout_22">
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_10">
         <item>
@@ -46,7 +46,7 @@
           <item>
            <widget class="QGroupBox" name="groupBox_6">
             <property name="title">
-             <string>下位机配置参数</string>
+             <string>下位机通讯参数配置</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_6" rowstretch="0,0">
              <item row="1" column="0">
@@ -84,7 +84,7 @@
                  <item>
                   <layout class="QVBoxLayout" name="verticalLayout_18">
                    <item>
-                    <layout class="QHBoxLayout" name="horizontalLayout_56" stretch=""/>
+                    <layout class="QHBoxLayout" name="horizontalLayout_56"/>
                    </item>
                   </layout>
                  </item>
@@ -479,7 +479,7 @@
           <item>
            <widget class="QGroupBox" name="groupBox_2">
             <property name="title">
-             <string>聚类参数</string>
+             <string>船舶检测参数</string>
             </property>
             <layout class="QGridLayout" name="gridLayout_4">
              <item row="0" column="0">
@@ -491,12 +491,12 @@
                    <item>
                     <widget class="QLabel" name="label_7">
                      <property name="text">
-                      <string>聚类距离</string>
+                      <string>边界提取半径</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="clusterTolerance">
+                    <widget class="QLineEdit" name="ship_bound_radius">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -509,30 +509,12 @@
                    <item>
                     <widget class="QLabel" name="label_11">
                      <property name="text">
-                      <string>栅格大小</string>
+                      <string>法线提取参数</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="resolution">
-                     <property name="alignment">
-                      <set>Qt::AlignCenter</set>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </item>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="1,2">
-                   <item>
-                    <widget class="QLabel" name="label_12">
-                     <property name="text">
-                      <string>栅格高度差</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLineEdit" name="difference_threshold">
+                    <widget class="QLineEdit" name="ship_normal_radius">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -549,12 +531,12 @@
                    <item>
                     <widget class="QLabel" name="label_8">
                      <property name="text">
-                      <string>聚类最小点数</string>
+                      <string>X轴网格数</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="minClusterSize">
+                    <widget class="QLineEdit" name="ship_grid_X">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -567,12 +549,12 @@
                    <item>
                     <widget class="QLabel" name="label_10">
                      <property name="text">
-                      <string>聚类最大点数</string>
+                      <string>Y轴网格数</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="maxClusterSize">
+                    <widget class="QLineEdit" name="ship_grid_Y">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -580,17 +562,25 @@
                    </item>
                   </layout>
                  </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_61">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_24">
                  <item>
                   <layout class="QHBoxLayout" name="horizontalLayout_27" stretch="1,2">
                    <item>
-                    <widget class="QLabel" name="label_20">
+                    <widget class="QLabel" name="label_36">
                      <property name="text">
-                      <string>K邻域值：</string>
+                      <string>检测角度最小值</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="kValue">
+                    <widget class="QLineEdit" name="ship_min_angle">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -598,17 +588,126 @@
                    </item>
                   </layout>
                  </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_25">
                  <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_40" stretch="1,2">
+                  <layout class="QHBoxLayout" name="horizontalLayout_62" stretch="1,2">
                    <item>
-                    <widget class="QLabel" name="label_29">
+                    <widget class="QLabel" name="label_38">
                      <property name="text">
-                      <string>欧式距离值：</string>
+                      <string>检测角度最大值</string>
                      </property>
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLineEdit" name="distance">
+                    <widget class="QLineEdit" name="ship_max_angle">
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupBox_7">
+            <property name="title">
+             <string>地面检测参数</string>
+            </property>
+            <layout class="QGridLayout" name="gridLayout_7">
+             <item row="0" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_49">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_13">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="1,2">
+                   <item>
+                    <widget class="QLabel" name="label_12">
+                     <property name="text">
+                      <string>X轴网格数</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="gound_grid_X">
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_21">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_50" stretch="1,2">
+                   <item>
+                    <widget class="QLabel" name="label_20">
+                     <property name="text">
+                      <string>Y轴网格数</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="gound_grid_Y">
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+              </layout>
+             </item>
+             <item row="1" column="0">
+              <layout class="QHBoxLayout" name="horizontalLayout_57">
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_20">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_18" stretch="1,2">
+                   <item>
+                    <widget class="QLabel" name="label_17">
+                     <property name="text">
+                      <string>检测角度最小值</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="gound_min_angle">
+                     <property name="alignment">
+                      <set>Qt::AlignCenter</set>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QVBoxLayout" name="verticalLayout_23">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_60" stretch="1,2">
+                   <item>
+                    <widget class="QLabel" name="label_29">
+                     <property name="text">
+                      <string>检测角度最大值</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLineEdit" name="gound_max_angle">
                      <property name="alignment">
                       <set>Qt::AlignCenter</set>
                      </property>
@@ -986,16 +1085,6 @@
                     </widget>
                    </item>
                   </layout>
-                 </item>
-                </layout>
-               </item>
-               <item>
-                <layout class="QHBoxLayout" name="horizontalLayout_45" stretch="1,1">
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_18" stretch=""/>
-                 </item>
-                 <item>
-                  <layout class="QHBoxLayout" name="horizontalLayout_42" stretch=""/>
                  </item>
                 </layout>
                </item>

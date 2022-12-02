@@ -19,6 +19,7 @@ class PTZ
 public:
     PTZ();
 
+    void start();
     void PTZ_init(HWND hwnd_);
     void PTZ_Left(int speed , int flag);/*左移*/
 
